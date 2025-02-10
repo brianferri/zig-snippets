@@ -1,6 +1,6 @@
 const std = @import("std");
 
-inline fn powerOf2For(x: u64) type {
+inline fn powerOf2For(x: comptime_int) type {
     comptime {
         if (x == 0) return u1;
         var tmp = x;
