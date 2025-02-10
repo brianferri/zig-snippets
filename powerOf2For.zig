@@ -1,34 +1,15 @@
 const std = @import("std");
 
-const UTypes = .{
-    u1,
-    u2,
-    u3,
-    u4,
-    u5,
-    u6,
-    u7,
-    u8,
-    u9,
-    u10,
-    u11,
-    u12,
-    u13,
-    u14,
-    u15,
-    u16,
-};
-
 inline fn powerOf2For(x: u64) type {
-    if (x == 0) return u1;
     comptime {
-        var tmp = x - 1;
+        if (x == 0) return u1;
+        var tmp = x;
         tmp |= tmp >> 1;
         tmp |= tmp >> 2;
         tmp |= tmp >> 4;
         tmp |= tmp >> 8;
         tmp |= tmp >> 16;
-        return UTypes[std.math.log2(tmp + 1)];
+        return @Type(.{ .Int = .{ .signedness = .unsigned, .bits = std.math.log2(tmp + 1) } });
     }
 }
 
